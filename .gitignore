@@ -1,0 +1,4 @@
+venv/
+.dockerignore
+pgdb/
+__pycache__
