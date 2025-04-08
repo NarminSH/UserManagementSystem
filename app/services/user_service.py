@@ -9,11 +9,10 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
 def create_user(user_data: UserCreate, db: Session):
-    existing_user = db.query(User).filter((User.email == user_data.email)|(User.username == user_data.username)).first()
+    existing_user = db.query(User).filter((User.email == user_data.email) | (User.username == user_data.username)).first()
     if existing_user:
         raise HTTPException(status_code=400, detail="Email or username already registered")
-    
-    
+     
     validate_password(user_data.password)
     
     hashed_password = pwd_context.hash(user_data.password)

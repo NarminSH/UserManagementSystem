@@ -28,12 +28,9 @@ def get_current_user_id(token: str = Depends(oauth2_scheme)):
     try:
         payload = jwt.decode(token, config.SECRET_KEY, algorithms=[config.ALGORITHM])
         user_id: str = int(payload.get("sub"))
-        print(user_id)
         if user_id is None:
-            print("username nonedirrr")
             raise credentials_exception
         return user_id
     except JWTError as e:
         print(repr(e))
-        print("yuxxxxxxxarida jwt error")
         raise credentials_exception
